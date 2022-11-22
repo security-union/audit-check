@@ -23,9 +23,9 @@ async function getData(actionInput: input.Input): Promise<interfaces.Report> {
     let stdout = '';
     try {
         core.startGroup('Calling cargo-audit (JSON output)');
-        const auditCommand = ['audit'];
+        let auditCommand = ['audit'];
         if (actionInput.cargoLockPath) {
-            auditCommand.concat(['-f', `${actionInput.cargoLockPath}/Cargo.lock`]);
+            auditCommand = auditCommand.concat(['-f', `${actionInput.cargoLockPath}/Cargo.lock`]);
         }
         auditCommand.push('--json');
         core.info(`calling ${auditCommand}`);
